@@ -1,0 +1,38 @@
+import random
+
+Answers = ["no", "No", "n", "N"]
+reply = 0
+
+while True:
+    max = int(input("Maximum? \n”))
+    min = int(input("Minimum? \n"))
+    number = random.randint(min,max)
+    
+    while True:
+        while True:
+            try:
+                guess = int(input("Guess? \n”))
+                if min <= guess <= max:
+                    break
+            except ValueError:
+                print("Wrong input")
+        
+        if guess == number:
+            print("You got it correct")
+            break
+        else:
+            if -1 <= guess-number <= 1:
+                print("Your guess is hot. Try again")
+            elif -2 <= guess-number <= 2:
+                print("Your guess is warm. Try again")
+            else:
+                print("Your guess is cold. Try again")
+    
+    playAgain = input("Do you want to play again? \n”)
+    for answer in Answers:
+        if answer == playAgain:
+            reply = 1
+            break
+    if reply == 1:
+        break
+
