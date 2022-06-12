@@ -1,0 +1,63 @@
+def checkCorrect(index, solutionSet, answer):
+    count = 0
+    for x in range(0,4):
+        if solutionSet[answer][x] == solutionSet[index][x]:
+            count += 1
+    return count
+
+def checkMissedPlaced(index, solutionSet, answer):
+    guess = []
+    newGuess = []
+    
+    for x in range(0,4):
+        guess.append(solutionSet[answer][x])
+        newGuess.append(solutionSet[index][x])
+    
+    for x in range(0,4):
+        if solutionSet[answer][x] == solutionSet[index][x]:
+            guess[x] = 0
+            newGuess[x] = 0
+            
+    count = 0
+    
+    for x in range(0,4):
+        if guess[x] != 0:
+            for y in range(0,4):
+                if guess[x] == newGuess[y]:
+                    count += 1
+                    newGuess[y] = 0
+                    break
+    
+    return count
+
+solutionSet = []
+for x in range (1,9):
+    for y in range (1,9):
+        for i in range (1,9):
+            for j in range (1,9):
+                solutionSet.append([x,y,i,j])
+
+possible = []
+for x in range(0,4096):
+    possible.append(True)
+    
+answer = 0
+
+while True:
+    for x in range(answer,4096):
+        if(possible[x] == True):
+            print("Answer:", solutionSet[x][0], solutionSet[x][1], solutionSet[x][2], solutionSet[x][3])
+            answer = x
+            break
+            
+    correct = (int(input("How many were correct? \n")))
+    missedPlaced = (int(input("How many were missed placed? \n")))
+    
+    if correct == 4:
+        break
+    
+    for index in range(0,4096):
+        if correct != checkCorrect(index, solutionSet, answer):
+            possible[index] = False
+        if missedPlaced != checkMissedPlaced(index, solutionSet, answer):
+            possible[index] = False
