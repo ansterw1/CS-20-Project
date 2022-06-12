@@ -1,0 +1,191 @@
+import random
+
+def switch(list, numberOne, numberTwo):
+        save = list[numberOne]
+        list[numberOne] = list[numberTwo]
+        list[numberTwo] = save
+
+def fill(list):
+    count = 0
+    while count < 100:
+        list.append(0)
+        count += 1
+        
+def populateRandomly(list):
+    count = 0
+    for val in list:
+        list[count] = random.randint(1,100)
+        count += 1
+        
+def populateSequentially(list):
+    count = 0
+    for val in list:
+        list[count] = count+1
+        count += 1
+
+def display(list):
+    count = 0
+    for val in list:
+        if list[count] < 10:
+            print(list[count],"  ", end = '')
+        elif list[count] >= 10 and list[count] != 100:
+            print(list[count]," ", end = '')
+        elif list[count] == 100:
+            print(list[count],"",end = '')
+        if (count+1) % 10 == 0 and count != 0:
+            print()
+        
+        count += 1
+    print()
+    
+def shuffle(list):
+    count = 0
+    for val in list:
+        randomNumber = random.randint(0,99)
+        
+        switch(list, count, randomNumber)
+        count += 1
+        
+def find(list):
+    answer = 0
+    
+    number = int(input("Number you wish to find \n"))
+    for val in list:
+        if number == val:
+            print("It is at index",list.index(number))
+            answer = 1
+    
+    if answer == 0:
+        print("-1")
+    
+def ascending(list):
+    copy = []
+    copy = list.copy()
+    copy.sort()
+    count = 0
+    
+    for val in list:
+        if copy[count] == list[count]:
+            count += 1
+            
+    if count == 100:
+        print(True)
+    else:
+        print(False)
+        
+def shuffleSort(list):
+    count = 0
+    while True:
+        while True:
+            randomOne = random.randint(0,99)
+            randomTwo = random.randint(0,99)
+            
+            if randomOne != randomTwo:
+                break
+        
+        if randomOne < randomTwo and list[randomOne] > list[randomTwo]:
+            switch(list, randomOne, randomTwo)
+            
+        elif randomTwo < randomOne and list[randomTwo] > list[randomOne]:
+            switch(list, randomOne, randomTwo)
+            
+        count += 1
+        
+        if count == 10000:
+            count = 0
+            break
+    
+    ascending(list)
+    
+def lowestValue(list):
+    number = 100
+    for val in list:
+        if val < number:
+            number = val
+    
+    print(number)
+
+def highestValue(list):
+    number = 0
+    for val in list:
+        if val > number:
+            number = val
+            
+def occurrence(list):
+    number = int(input("The number you want to find the occurrence of \n"))
+    print(list.count(number))
+    
+def replace(list):
+    number = int(input("The number you want to replace \n"))
+    replacement = int(input("The number you want to replace it with \n"))
+    
+    count = 0
+    for val in list:
+        if val == number:
+            list[count] = replacement
+            
+        count += 1
+    
+def greatestSum(list):
+    highestSum = 0 
+    count = 0
+    index = 0
+    
+    while count <= int(len(list)-10):
+        sum = list[count] + list[count+1] + list[count+2] + list[count+3] + list[count+4] + list[count+5] + list[count+6] + list[count+7] + list[count+8] + list[count+9]
+        
+        if sum > highestSum:
+            highestSum = sum
+            index = count
+        
+        count += 1    
+        
+    print("The highest sum is", sum, "at index", index, "-", index+9, "\n")
+    
+reply = 0
+list = []
+fill(list)
+while True:
+    print("0. Exit the program")
+    print("1. Populate the array randomly")
+    print("2. Populate the array sequentially from 1 to 100")
+    print("3. Display the array")
+    print("4. Shuffle the array")
+    print("5. Number finder")
+    print("6. Find if it is in ascending order")
+    print("7. Shuffle sort")
+    print("8. Lowest value")
+    print("9. Highest value")
+    print("10. Occurrence")
+    print("11. Replace")
+    print("12. Ten consecutive indexes with the greatest sum")
+    
+    reply = int(input())
+    
+    if reply == 0:
+        print("Program has ended")
+        break
+    elif reply == 1:
+        populateRandomly(list)
+    elif reply == 2:
+        populateSequentially(list)
+    elif reply == 3:
+        display(list)
+    elif reply == 4:
+        shuffle(list)
+    elif reply == 5:
+        find(list)
+    elif reply == 6:
+        ascending(list)
+    elif reply == 7:
+        shuffleSort(list)
+    elif reply == 8:
+        lowestValue(list)
+    elif reply == 9:
+        highestValue(list)
+    elif reply == 10:
+        occurrence(list)
+    elif reply == 11:
+        replace(list)
+    elif reply == 12:
+        greatestSum(list)
