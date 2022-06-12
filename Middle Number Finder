@@ -1,0 +1,8 @@
+threeNumbers = []
+threeNumbers.append(int(input("First number \n")))
+threeNumbers.append(int(input("Second number \n”)))
+threeNumbers.append(int(input(“Third number \n”)))
+
+threeNumbers.sort()
+
+print(threeNumbers[1])
