@@ -1,0 +1,21 @@
+def add(numbers):
+    sum = 0
+    for val in list:
+        sum += int(val)
+            
+    print(sum)
+    
+list = []
+count = 0
+number = input("Number?")
+length = len(number)
+
+while count < length:
+    list.append(number[count])
+    count += 1
+
+if list[0] == "-":
+    list[0] = 0
+
+add(list)
+
